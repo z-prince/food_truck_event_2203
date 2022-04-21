@@ -9,6 +9,12 @@
 
 ## Iteration 1 - Items & FoodTrucks
 
+Graded Items:
+ 1. Create an Item with attributes: `Item.new`
+ 1. Create a FoodTruck with attributes: `FoodTruck.new`
+ 1. Check quantity of an Item on the FoodTruck: `FoodTruck #check_stock`
+ 1. Stock an Item on the FoodTruck: `FoodTruck #stock`
+
 The Event will need to keep track of its FoodTrucks and their Items. Each FoodTruck will be able to report its total inventory, stock items, and return the quantity of items. Any item not in stock should return `0` by default.
 
 Use TDD to create a `FoodTruck` class that responds to the following interaction pattern:
@@ -64,6 +70,13 @@ pry(main)> food_truck.inventory
 ```
 
 ## Iteration 2 - Event and FoodTrucks
+
+Graded Items:
+1. Create an Event with attributes: `Event.new`
+1. Add a FoodTruck to an Event: `Event #add_food_truck`
+1. Return the list of FoodTruck names for an Event: `Event #food_truck_names`
+1. Return the list of FoodTrucks that sell a given Item for an Event: `Event #food_trucks_that_sell`
+1. Return the potential revenue from a FoodTruck: `FoodTruck #potential_revenue`
 
 A FoodTruck will be able to calculate their `potential_revenue` - the sum of all their items' price * quantity.
 
@@ -153,6 +166,11 @@ pry(main)> food_truck3.potential_revenue
 
 ## Iteration 3 - Items sold at the Event
 
+Graded Items:
+ 1. Return a list of overstocked Items for an Event: `Event #overstocked_items`
+ 1. Return a sorted list of Item names for an Event: `Event #sorted_item_list`
+ 1. Return a hash of total inventory from an Event: `Event #total_inventory`
+
 Add a method to your `Event` class called `sorted_item_list` that returns a list of names of all items the FoodTrucks have in stock, sorted alphabetically. This list should not include any duplicate items.
 
 Additionally, your `Event` class should have a method called `total_inventory` that reports the quantities of all items sold at the event. Specifically, it should return a hash with items as keys and hash as values - this sub-hash should have two key/value pairs: quantity pointing to total inventory for that item and food_trucks pointing to an array of the food trucks that sell that item.
@@ -213,6 +231,12 @@ pry(main)> event.add_food_truck(food_truck2)
 
 pry(main)> event.add_food_truck(food_truck3)    
 
+pry(main)> event.overstocked_items
+#=> [#<Item:0x007f9c56740d48...>]
+
+pry(main)> event.sorted_item_list
+#=> ["Apple Pie (Slice)", "Banana Nice Cream", "Peach Pie (Slice)", "Peach-Raspberry Nice Cream"]
+
 pry(main)> event.total_inventory
 #=> {
   #   #<Item:0x007f9c56740d48...> => {
@@ -232,23 +256,29 @@ pry(main)> event.total_inventory
   #     food_trucks: [#<FoodTruck:0x00007fe1349bed40...>, #<FoodTruck:0x00007fe134910650...>]
   #   },
   # }
-
-pry(main)> event.overstocked_items
-#=> [#<Item:0x007f9c56740d48...>]
-
-pry(main)> event.sorted_item_list
-#=> ["Apple Pie (Slice)", "Banana Nice Cream", "Peach Pie (Slice)", "Peach-Raspberry Nice Cream"]
 ```
 
 ## Iteration 4 - Selling Items
 
-Add a method to your Event class called `sell` that takes an item and a quantity as arguments. There are two possible outcomes of the `sell` method:
+Graded Items:
+ 1. Return the creation date of an Auction: `Event #date`
+ 1. Sell an Item at an Event: `Event #sell`
+
+Some notes:
+- An Event will now be created with a date - whatever date the event is created on through the use of `Date.today`. The addition of a date to the event should NOT break any previous tests.  The `date` method will return a string representation of the date - 'dd/mm/yyyy'. We want you to test this in with a date that is IN THE PAST. In order to test the date method in a way that will work today, tomorrow and on any date in the future, you will need to use a stub :)
+- Add a method to your Event class called `sell` that takes an item and a quantity as arguments. There are two possible outcomes of the `sell` method:
+  1. If the Event does not have enough of the item in stock to satisfy the given quantity, this method should return `false`.
+  2. If the Event's has enough of the item in stock to satisfy the given quantity, this method should return `true`. Additionally, this method should reduce the stock of the FoodTrucks. It should look through the FoodTrucks in the order they were added and sell the item from the first FoodTruck with that item in stock. If that FoodTruck does not have enough stock to satisfy the given quantity, the FoodTruck's entire stock of that item will be depleted, and the remaining quantity will be sold from the next food_truck with that item in stock. It will follow this pattern until the entire quantity requested has been sold.
+  - For example, suppose food_truck1 has 35 `peach pies` and food_truck3 has 65 `peach pies`, and food_truck1 was added to the event first. If the method `sell(<ItemXXX, @name = 'Peach Pie'...>, 40)` is called, the method should return `true`, food_truck1's new stock of `peach pies` should be 0, and food_truck3's new stock of `peach pies` should be 60.
+
+<!-- Add a method to your Event class called `sell` that takes an item and a quantity as arguments. There are two possible outcomes of the `sell` method:
 
 1. If the Event does not have enough of the item in stock to satisfy the given quantity, this method should return `false`.
 
 2. If the Event's has enough of the item in stock to satisfy the given quantity, this method should return `true`. Additionally, this method should reduce the stock of the FoodTrucks. It should look through the FoodTrucks in the order they were added and sell the item from the first FoodTruck with that item in stock. If that FoodTruck does not have enough stock to satisfy the given quantity, the FoodTruck's entire stock of that item will be depleted, and the remaining quantity will be sold from the next food_truck with that item in stock. It will follow this pattern until the entire quantity requested has been sold.
 
 For example, suppose food_truck1 has 35 `peach pies` and food_truck3 has 65 `peach pies`, and food_truck1 was added to the event first. If the method `sell(<ItemXXX, @name = 'Peach Pie'...>, 40)` is called, the method should return `true`, food_truck1's new stock of `peach pies` should be 0, and food_truck3's new stock of `peach pies` should be 60.
+-->
 
 Use TDD to update the `Event` class so that it responds to the following interaction pattern:
 
