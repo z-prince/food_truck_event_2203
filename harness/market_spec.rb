@@ -123,7 +123,17 @@ RSpec.describe 'Event Spec Harness' do
       @event.add_food_truck(@food_truck3)
     end
 
-    it '10. Event #total_inventory' do
+    it '10. Event #overstocked_items' do
+      expect(@event).to respond_to(:overstocked_items).with(0).argument
+      expect(@event.overstocked_items).to eq([@item1])
+    end
+
+    it '11. Event #sorted_item_list' do
+      expect(@event).to respond_to(:sorted_item_list).with(0).argument
+      expect(@event.sorted_item_list).to eq(["Apple Pie (Slice)", "Banana Nice Cream", "Peach Pie (Slice)", "Peach-Raspberry Nice Cream"])
+    end
+
+    it '12. Event #total_inventory' do
       expect(@event).to respond_to(:total_inventory).with(0).argument
       expected = {
         @item1 => {
@@ -145,16 +155,6 @@ RSpec.describe 'Event Spec Harness' do
       }
 
       expect(@event.total_inventory).to eq(expected)
-    end
-
-    it '11. Event #overstocked_items' do
-      expect(@event).to respond_to(:overstocked_items).with(0).argument
-      expect(@event.overstocked_items).to eq([@item1])
-    end
-
-    it '12. Event #sorted_item_list' do
-      expect(@event).to respond_to(:sorted_item_list).with(0).argument
-      expect(@event.sorted_item_list).to eq(["Apple Pie (Slice)", "Banana Nice Cream", "Peach Pie (Slice)", "Peach-Raspberry Nice Cream"])
     end
   end
 
