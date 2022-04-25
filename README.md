@@ -261,7 +261,7 @@ pry(main)> event.total_inventory
 ## Iteration 4 - Selling Items
 
 Graded Items:
- 1. Return the creation date of an Auction: `Event #date`
+ 1. Return the creation date of an Event: `Event #date`
  1. Sell an Item at an Event: `Event #sell`
 
 Some notes:
