@@ -171,7 +171,7 @@ Graded Items:
  1. Return a sorted list of Item names for an Event: `Event #sorted_item_list`
  1. Return a hash of total inventory from an Event: `Event #total_inventory`
 
-Add a method to your `Event` class called `sorted_item_list` that returns a list of names of all items the FoodTrucks have in stock, sorted alphabetically. This list should not include any duplicate items.
+Add a method to your `Event` class called `sorted_item_list` that returns a list of all items the FoodTrucks have in stock, sorted alphabetically (by name). This list should not include any duplicate items.
 
 Additionally, your `Event` class should have a method called `total_inventory` that reports the quantities of all items sold at the event. Specifically, it should return a hash with items as keys and hash as values - this sub-hash should have two key/value pairs: quantity pointing to total inventory for that item and food_trucks pointing to an array of the food trucks that sell that item.
 
@@ -229,13 +229,13 @@ pry(main)> event.add_food_truck(food_truck1)
 
 pry(main)> event.add_food_truck(food_truck2)    
 
-pry(main)> event.add_food_truck(food_truck3)    
+pry(main)> event.add_food_truck(food_truck3)  
+
+pry(main)> event.sorted_item_list
+#=> [#<Item:0x007f9c565c0ce8...>, #<Item:0x007f9c56343038...>, #<Item:0x007f9c56740d48...>, #<Item:0x007f9c562a5f18...>]
 
 pry(main)> event.overstocked_items
 #=> [#<Item:0x007f9c56740d48...>]
-
-pry(main)> event.sorted_item_list
-#=> ["Apple Pie (Slice)", "Banana Nice Cream", "Peach Pie (Slice)", "Peach-Raspberry Nice Cream"]
 
 pry(main)> event.total_inventory
 #=> {
