@@ -167,15 +167,15 @@ pry(main)> food_truck3.potential_revenue
 ## Iteration 3 - Items sold at the Event
 
 Graded Items:
- 1. Return a list of overstocked Items for an Event: `Event #overstocked_items`
  1. Return a sorted list of Item names for an Event: `Event #sorted_item_list`
+ 1. Return a list of overstocked Items for an Event: `Event #overstocked_items`
  1. Return a hash of total inventory from an Event: `Event #total_inventory`
 
 Add a method to your `Event` class called `sorted_item_list` that returns a list of all items the FoodTrucks have in stock, sorted alphabetically (by name). This list should not include any duplicate items.
 
-Additionally, your `Event` class should have a method called `total_inventory` that reports the quantities of all items sold at the event. Specifically, it should return a hash with items as keys and hash as values - this sub-hash should have two key/value pairs: quantity pointing to total inventory for that item and food_trucks pointing to an array of the food trucks that sell that item.
-
 You `Event` will also be able to identify `overstocked_items`.  An item is overstocked if it is sold by more than 1 food truck AND the total quantity is greater than 50.
+
+Additionally, your `Event` class should have a method called `total_inventory` that reports the quantities of all items sold at the event. Specifically, it should return a hash with items as keys and hash as values - this sub-hash should have two key/value pairs: quantity pointing to total inventory for that item and food_trucks pointing to an array of the food trucks that sell that item.
 
 Use TDD to update your `Event` class so that it responds to the following interaction pattern:
 
