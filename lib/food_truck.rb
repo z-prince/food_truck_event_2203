@@ -1,3 +1,5 @@
+require_relative 'item'
+
 class FoodTruck
   attr_reader :name,
               :inventory
