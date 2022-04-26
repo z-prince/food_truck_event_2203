@@ -1,11 +1,14 @@
 require_relative 'food_truck'
+require 'date'
 class Event
   attr_reader :name,
-              :food_trucks
+              :food_trucks,
+              :date
 
   def initialize(name)
     @name = name
     @food_trucks = []
+    @date = Date.today.strftime('%d/%m/%Y')
   end
 
   def add_food_truck(food_truck)
@@ -32,7 +35,7 @@ class Event
     list.sort_by(&:name)
   end
 
-  # will come back to this edit: came back to this, much easier with total_inventory method
+  # will come back to this. edit: came back to this, much easier with total_inventory method
   def overstocked_items
     total_inventory.select do |_item, quant_trucks|
       quant_trucks[:quantity] > 50 && quant_trucks[:food_trucks].length > 1
@@ -53,4 +56,10 @@ class Event
     end
     total_hash
   end
+
+  def sell(item, quant)
+    false if total_inventory[item][:quantity] < quant
+  end
+
+  def sell_truck_inventory; end
 end
