@@ -125,8 +125,7 @@ RSpec.describe 'Event Spec Harness' do
 
     it '10. Event #sorted_item_list' do
       expect(@event).to respond_to(:sorted_item_list).with(0).argument
-      # ["Apple Pie (Slice)", "Banana Nice Cream", "Peach Pie (Slice)", "Peach-Raspberry Nice Cream"]
-      expect(@event.sorted_item_list).to eq([@item2, @item4, @item1, @item3)
+      expect(@event.sorted_item_list).to eq(["Apple Pie (Slice)", "Banana Nice Cream", "Peach Pie (Slice)", "Peach-Raspberry Nice Cream"])
     end
 
     it '11. Event #overstocked_items' do
